@@ -1,0 +1,123 @@
+using System;
+
+namespace Peanut001
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            DriverManager driver = new DriverManager();
+     
+            driver.Run();
+
+        }
+    }
+
+    class DriverManager
+    {
+       
+        private static int NumberOfLionWinners = 0;
+        private static int NumberOfTigerWinners = 0;
+     
+
+        public static void setNumberOfLionWinners(int increment)
+        {
+            NumberOfLionWinners += increment;
+        }
+
+        public static void setNumberOfTigerWinners(int increment)
+        {
+            NumberOfTigerWinners += increment;
+        }
+
+        public static int getNumberOfLionWinners()
+        {
+            return NumberOfLionWinners;
+        }
+
+        public static int getNumberOfTigerWinners()
+        {
+            return NumberOfTigerWinners;
+        }
+        public void Run()
+        {
+            Lion lion1 = new Lion();
+            Tiger tiger1 = new Tiger();
+
+           
+            Lion[] lions = new Lion[10];
+            Tiger[] tigers = new Tiger[10];
+
+            for (int i = 1; i <  lions.Length; i++)
+            {
+                lions[i] = new Lion();
+            }
+
+            for (int i = 1; i <  tigers.Length; i++)
+            {
+                tigers[i] = new Tiger();
+            }
+
+    
+            Competition c1 = new Competition();
+            c1.DoCompetition(lions, tigers);
+        }
+    }
+
+    class Competition
+    {
+        public void DoCompetition(Lion[] a, Tiger[] b)
+        {
+    
+
+            for (int z = 0; z <= a.Length; z++)
+            {
+                if (a[z].GetStrength() > b[z].GetStrength()){
+                    DriverManager.setNumberOfLionWinners(1);
+                }
+                else {DriverManager.setNumberOfTigerWinners(1); }
+            }
+
+            String m = Convert.ToString(DriverManager.getNumberOfLionWinners());
+
+            String n = Convert.ToString(DriverManager.getNumberOfTigerWinners());
+            Console.WriteLine("LIONS: {0},   Tigers: {1}", m, n );
+        }
+
+    }
+
+    class Feline
+    {
+            String name;
+            int Strength;
+
+           
+            public Feline()
+                {
+                    this.SetStrength();
+                }
+
+            public int GetStrength()
+        {
+            return this.Strength;
+        }
+            public int SetStrength()
+            { Random r1 = new Random();
+              
+                this.Strength = r1.Next()/10000000;
+            Console.WriteLine(this.Strength);
+                return this.Strength;
+            }
+    }
+    class Lion:Feline
+    {
+     
+    }
+
+    class Tiger : Feline
+    {
+      
+    }
+
+}
